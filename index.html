@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">
+<title>Dashboard Svarna Dipa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=Archivo:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark}
+body{margin:0;background:#11171d;color:#e6ecf1;font:19px/1.45 "Aptos Narrow","Archivo Narrow","Arial Narrow",system-ui,sans-serif;
+  text-transform:uppercase;letter-spacing:.03em;-webkit-font-smoothing:antialiased}
+/* skala 75% di layar laptop seperti Panel Gudang (arahan Joe 27 Okt 2026), HP tetap 100% */
+:root{--skala:1}
+@media (min-width:700px){html{zoom:.75}:root{--skala:.75}}
+
+.atas{position:sticky;top:0;z-index:9;background:#11171d;border-bottom:1px solid #2a3642}
+.atas .bungkus{max-width:1200px;margin:0 auto;padding:0 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:60px;flex-wrap:wrap}
+.atas .merek{font-weight:600;font-size:24px;letter-spacing:.3em}
+.atas .kanan{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding-block:8px}
+.atas .waktu{color:#9aa8b5;font-size:14px;letter-spacing:.06em}
+button.tipis{font:inherit;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#e6ecf1;background:none;cursor:pointer;
+  border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:10px 18px}
+button.tipis:hover{border-color:#e6ecf1;background:rgba(255,255,255,.06)}
+@property --sorot-x{syntax:"<percentage>";inherits:true;initial-value:0%}
+.merek-raksasa{width:100%;color:#e6ecf1;user-select:none;
+  -webkit-mask-image:radial-gradient(circle at var(--sorot-x) 50%,#000 0%,transparent 60%);
+  mask-image:radial-gradient(circle at var(--sorot-x) 50%,#000 0%,transparent 60%)}
+.merek-raksasa svg{display:block;width:100%;height:auto;opacity:.4}
+.merek-raksasa text{font-family:"Archivo","Arial Black",sans-serif;font-weight:800}
+@keyframes sorot-jalan{from{--sorot-x:0%}to{--sorot-x:100%}}
+@media (hover:none){.merek-raksasa{animation:sorot-jalan 7s ease-in-out infinite alternate}}
+@media (prefers-reduced-motion:reduce){.merek-raksasa{animation:none;--sorot-x:50%}}
+.atas-merek{border-bottom:1px solid #2a3642}
+
+main{max-width:1200px;margin:24px auto 6vh;padding:0 16px}
+/* layar utama: 4 kotak di tengah antara batas bawah merek raksasa dan batas bawah layar (Joe 29 Okt) */
+body.utama{min-height:calc(100vh / var(--skala));display:flex;flex-direction:column}
+body.utama main{flex:1;width:100%;box-sizing:border-box;margin:0 auto;padding:24px 16px;display:flex;flex-direction:column;justify-content:center}
+body.utama .modul{margin-top:0}
+h2{font-size:16px;letter-spacing:.3em;color:#6fb3d2;margin:24px 0 10px}
+/* kotak = kartu cabang Panel Gudang (.pilih/.cab di Bot WMS dashboard.html) */
+.pilih{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:12px}
+.cab{background:linear-gradient(165deg,#1d2833,#18212a 60%);border:1px solid #2a3642;border-radius:6px;padding:24px 22px 20px;color:#e6ecf1;
+  min-height:150px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;text-decoration:none}
+a.cab:hover{border-color:#6fb3d2}
+.cab .nama{font-weight:600;font-size:clamp(26px,2.6vw,34px);line-height:1.1;letter-spacing:.04em}
+.cab .ket{margin-top:auto;padding-top:10px;color:#9aa8b5;font-size:14px;font-weight:600;letter-spacing:.1em;width:100%}
+.cab.mati{opacity:.45}
+.modul{margin-top:24px}
+.modul .cab{min-height:200px;justify-content:center}
+.modul .cab .nama{font-size:clamp(28px,2.6vw,36px)}
+/* 7 modul satu baris di layar lebar (Vendor 30 Okt; Penjualan dipecah Sales/Admin Cabang/Pusat 31 Okt) */
+.pilih.modul{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
+.cab .kurung{white-space:nowrap}
+.kembali{display:inline-block;margin-top:8px;color:#9aa8b5;text-decoration:none;letter-spacing:.06em;font-size:15px}
+.kembali:hover{color:#e6ecf1}
+</style></head>
+<body class=""><svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="derauMerek"><feTurbulence type="fractalNoise" baseFrequency="1" numOctaves="4" result="derau"/><feComposite in="SourceGraphic" in2="derau" operator="in"/></filter></svg>
+<header class="atas"><div class="bungkus"><div class="merek">SVARNA DIPA</div><div class="kanan"><span class="waktu">DATA 01-11-2026 03.01</span><button class="tipis" onclick="location.replace(location.pathname + '?v=' + Date.now() + location.hash)">Update</button></div></div></header>
+<div class="atas-merek"><div class="merek-raksasa" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2468.89 566.93" fill="currentColor">
+<text x="0" y="546" font-size="760" textLength="2468.89" lengthAdjust="spacingAndGlyphs" filter="url(#derauMerek)">SVARNA DIPA</text></svg></div></div>
+<script>
+let mouseX = null, sorotKini = 0;
+document.addEventListener("mousemove", e => { mouseX = e.clientX; });
+(function gerakSorot() {
+  if (mouseX !== null) {
+    for (const el of document.querySelectorAll(".merek-raksasa")) {
+      const r = el.getBoundingClientRect();
+      if (!r.width) continue;
+      const tujuan = Math.min(100, Math.max(0, (mouseX - r.left) / r.width * 100));
+      sorotKini += (tujuan - sorotKini) * .12;
+      el.style.setProperty("--sorot-x", sorotKini.toFixed(2) + "%");
+    }
+  }
+  requestAnimationFrame(gerakSorot);
+})();
+</script>
+<main>
+<div class="pilih modul"><a class="cab" href="sales/"><div class="nama">SALES</div><div class="ket">Per cabang</div></a><a class="cab" href="penjualan/"><div class="nama">ADMIN CABANG</div><div class="ket">Per cabang</div></a><a class="cab" href="penjualan/pusat/"><div class="nama">PUSAT</div><div class="ket">Semua cabang</div></a><a class="cab" href="gudang/"><div class="nama">GUDANG<br><span class="kurung">(WMS)</span></div><div class="ket">Kontrol barang keluar</div></a><a class="cab" href="http://100.98.122.77:8780/h/desty/"><div class="nama">ONLINE<br><span class="kurung">(DESTY)</span></div><div class="ket">Online Web Desty</div></a><a class="cab" href="pajak/"><div class="nama">PAJAK<br><span class="kurung">(TAX)</span></div><div class="ket">Dashboard pajak</div></a><a class="cab" href="vendor/"><div class="nama">VENDOR<br><span class="kurung">(PABRIK)</span></div><div class="ket">Pesanan pembelian</div></a></div>
+</main></body></html>
