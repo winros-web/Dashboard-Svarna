@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">
+<title>Kotak Masuk SP2DK - Svarna Dipa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=Archivo:wght@700;800&display=swap" rel="stylesheet">
+<!-- Modul Kotak Masuk SP2DK (BEN, 7 Nov 2026, arahan Joe). Halaman ini kerangka saja: tidak memuat data apa pun.
+     Surat dan jawaban diambil dari layanan di Mac Winros@ (https://svarna5s-mac-mini.tail7a15d8.ts.net/api/sp2dk/*) sesudah sandi akun modul Pajak benar. -->
+<style>
+:root{color-scheme:dark;--latar:#11171d;--kartu:#18212a;--garis:#2a3642;--teks:#e6ecf1;--redup:#9aa8b5;--aksen:#6fb3d2;--merah:#f08a80;--hijau:#7fd1a0;--kuning:#e8c66a}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--latar);color:var(--teks);font:19px/1.45 "Aptos Narrow","Archivo Narrow","Arial Narrow",system-ui,sans-serif;
+  letter-spacing:.02em;-webkit-font-smoothing:antialiased}
+@media (min-width:700px){html{zoom:.75}}
+.kapital{text-transform:uppercase}
+button,input,textarea{font:inherit;color:inherit}
+/* layar sandi = sama dengan modul lain */
+#gerbang{position:fixed;inset:0;z-index:99;overflow:auto;background:var(--latar);text-transform:uppercase}
+#gerbang form{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5vh;padding:4vh 16px 6vh;text-align:center}
+#gerbang .judul{font:800 clamp(34px,6vw,64px)/1 "Archivo","Arial Black",sans-serif;letter-spacing:.04em}
+#gerbang .judul small{display:block;font:600 18px "Archivo Narrow",sans-serif;letter-spacing:.3em;color:var(--aksen);margin-top:14px}
+#gerbang .isi-masuk{width:min(520px,100%);display:flex;flex-direction:column;gap:14px}
+#gerbang input{width:100%;height:64px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:#2b6382;color:#fff;font-weight:600;font-size:22px;
+  text-align:center;padding:0 28px;outline:none}
+#gerbang input:focus{background:#2f6d8f;box-shadow:0 0 0 4px rgba(111,179,210,.28)}
+#gerbang input::placeholder{color:rgba(255,255,255,.9);text-transform:uppercase;letter-spacing:.04em}
+#gerbang button{height:64px;font-weight:600;font-size:22px;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.22);
+  border-radius:999px;background:transparent;cursor:pointer}
+#gerbang button:hover{background:var(--teks);color:var(--latar)}
+#gerbang button:disabled{opacity:.4;cursor:wait}
+#ketMasuk{min-height:24px;font-size:16px;font-weight:600;color:var(--redup)}
+#ketMasuk.salah{color:var(--merah)}
+#gerbang p{color:var(--redup);font-size:16px;margin:6px 0 0}
+/* kepala */
+.atas{position:sticky;top:0;z-index:9;background:var(--latar);border-bottom:1px solid var(--garis)}
+.atas .bungkus{max-width:1500px;margin:0 auto;padding:0 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:60px;flex-wrap:wrap}
+.atas .merek{font-weight:600;font-size:24px;letter-spacing:.3em}
+.atas .kanan{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding-block:8px}
+.tipis{font-size:15px;letter-spacing:.06em;text-transform:uppercase;background:none;cursor:pointer;border:1px solid rgba(255,255,255,.25);border-radius:999px;
+  padding:10px 18px;text-decoration:none;color:var(--teks)}
+.tipis:hover{border-color:var(--teks);background:rgba(255,255,255,.06)}
+main{max-width:1500px;margin:0 auto 6vh;padding:16px}
+h1{font:800 clamp(30px,4vw,52px)/1 "Archivo","Arial Black",sans-serif;letter-spacing:.03em;margin:10px 0 6px;text-transform:uppercase}
+.pita{background:#2a2414;border:1px solid #5b4a1c;color:var(--kuning);border-radius:6px;padding:10px 14px;font-weight:600;font-size:16px;letter-spacing:.05em;text-transform:uppercase;margin:10px 0 14px}
+.saring{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.saring button{font-size:15px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:none;border:1px solid var(--garis);border-radius:999px;padding:8px 16px;cursor:pointer;color:var(--redup)}
+.saring button.pilih{border-color:var(--aksen);color:var(--teks);background:rgba(111,179,210,.14)}
+.saring .sekat{width:1px;background:var(--garis);margin:0 4px}
+.tata{display:grid;grid-template-columns:minmax(300px,440px) 1fr;gap:16px;align-items:start}
+@media (max-width:900px){.tata{grid-template-columns:1fr}}
+#daftar{display:flex;flex-direction:column;gap:8px}
+.baris{text-align:left;background:linear-gradient(165deg,#1d2833,var(--kartu) 60%);border:1px solid var(--garis);border-radius:6px;padding:14px 16px;cursor:pointer;width:100%}
+.baris:hover,.baris.pilih{border-color:var(--aksen)}
+.baris.belum{border-left:5px solid var(--aksen)}
+.baris .atasnya{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--redup)}
+.baris .perihal{font-weight:600;font-size:20px;line-height:1.2;margin:6px 0}
+.baris .bawahnya{display:flex;justify-content:space-between;gap:8px;font-size:15px;color:var(--redup);text-transform:uppercase;letter-spacing:.04em}
+.cap{display:inline-block;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1px solid}
+.cap.baru{color:var(--aksen)}.cap.dijawab{color:var(--kuning)}.cap.ditanggapi{color:var(--merah)}.cap.selesai{color:var(--hijau)}
+.kosong{color:var(--redup);text-transform:uppercase;letter-spacing:.08em;padding:30px 0;text-align:center}
+#rinci{background:var(--kartu);border:1px solid var(--garis);border-radius:6px;padding:22px 24px;min-height:300px}
+#rinci h2{font-size:28px;line-height:1.15;margin:8px 0 14px}
+#rinci h3{font-size:15px;letter-spacing:.28em;color:var(--aksen);text-transform:uppercase;margin:22px 0 8px}
+.kop{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;border-block:1px solid var(--garis);padding:12px 0}
+.kop div span{display:block;font-size:13px;letter-spacing:.14em;color:var(--redup);text-transform:uppercase}
+.kop div b{font-size:19px;font-weight:600}
+.paragraf{white-space:pre-wrap;overflow-wrap:anywhere}
+.gulir{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:700px;font-size:17px}   /* di HP tabel digeser ke samping, kolom uraian tidak terjepit */
+td:nth-child(2){min-width:260px}
+th,td{border:1px solid var(--garis);padding:8px 10px;vertical-align:top;text-align:left}
+th{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--redup);background:#141c24}
+td.angka,th.angka{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td small{display:block;color:var(--redup);font-size:14px;margin-top:4px;white-space:pre-wrap}
+tfoot td{font-weight:700}
+ol,ul{margin:0;padding-left:24px}
+.balasan{border:1px solid var(--garis);border-radius:6px;padding:12px 14px;margin-bottom:10px}
+.balasan.wp{border-left:5px solid var(--hijau)}.balasan.fiskus{border-left:5px solid var(--merah)}
+.balasan .siapa{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--redup);margin-bottom:6px}
+.lamp{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.lamp button{font-size:15px;background:none;border:1px solid var(--garis);border-radius:999px;padding:6px 14px;cursor:pointer}
+.lamp button:hover{border-color:var(--aksen)}
+#formJawab textarea{width:100%;min-height:180px;background:#0f151b;border:1px solid var(--garis);border-radius:6px;padding:12px 14px;font-size:19px;line-height:1.45;resize:vertical;outline:none}
+#formJawab textarea:focus{border-color:var(--aksen)}
+.aksi{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.utama{font-weight:700;font-size:18px;letter-spacing:.08em;text-transform:uppercase;background:var(--aksen);color:#0c1218;border:0;border-radius:999px;padding:13px 28px;cursor:pointer}
+.utama:disabled{opacity:.5;cursor:wait}
+#pilihan{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+#pilihan span{font-size:15px;border:1px solid var(--garis);border-radius:999px;padding:5px 8px 5px 14px}
+#pilihan span button{background:none;border:0;color:var(--merah);cursor:pointer;font-weight:700;padding:0 6px}
+#ketJawab{font-weight:600;font-size:16px;color:var(--redup)}
+#ketJawab.salah{color:var(--merah)}#ketJawab.baik{color:var(--hijau)}
+</style></head>
+<body>
+<div id="gerbang">
+  <form id="formMasuk" autocomplete="on">
+    <div class="judul">KOTAK MASUK SP2DK<small>SVARNA DIPA</small></div>
+    <div class="isi-masuk">
+      <input type="text" name="username" value="pajak" autocomplete="username" hidden>
+      <input id="sandiMasuk" name="password" type="password" autocomplete="current-password" placeholder="Sandi modul pajak" required>
+      <div id="ketMasuk"></div>
+      <button id="tombolMasuk" type="submit">Masuk</button>
+      <p>Khusus tim pajak. Isi halaman ini rahasia perusahaan. Jangan bagikan sandi, tangkapan layar, atau isinya kepada pihak luar.</p>
+    </div>
+  </form>
+</div>
+<header class="atas"><div class="bungkus"><div class="merek">SVARNA DIPA</div>
+  <div class="kanan"><a class="tipis" href="../">‹ Menu utama</a><button class="tipis" id="muat">Muat ulang</button><button class="tipis" id="keluar">Keluar</button></div></div></header>
+<main>
+  <h1>Kotak Masuk SP2DK</h1>
+  <div class="pita">Simulasi internal. Surat di sini dibuat petugas pajak internal (agen AI) untuk menemukan kelemahan data lebih dulu. Bukan surat dari DJP.</div>
+  <div class="saring" id="saring"></div>
+  <div class="tata">
+    <div id="daftar"></div>
+    <div id="rinci"><div class="kosong">Pilih surat di sebelah kiri</div></div>
+  </div>
+</main>
+<script>
+(() => {
+  const API = "https://svarna5s-mac-mini.tail7a15d8.ts.net/api/", AKUN = "pajak", KUNCI = "sp2dk-sesi";
+  const $ = (s) => document.querySelector(s);
+  const el = (tag, kelas, teks) => { const e = document.createElement(tag); if (kelas) e.className = kelas; if (teks != null) e.textContent = teks; return e; };
+  const rp = (n) => (n == null || n === "") ? "" : new Intl.NumberFormat("id-ID", { maximumFractionDigits: 0 }).format(n);
+  const tgl = (s) => { const [y, m, d] = String(s || "").slice(0, 10).split("-"); return d ? d + "-" + m + "-" + y + String(s).slice(10, 16) : ""; };
+  const STATUS = { baru: "Baru", dijawab: "Sudah dijawab", ditanggapi: "Perlu jawaban lagi", selesai: "Selesai" };
+  let token = null, surat = [], fiskus = {}, saringF = "", saringS = "", terpilih = null, berkas = [];
+  try { token = sessionStorage.getItem(KUNCI); } catch (e) {}
+
+  async function minta(jalan, isi) {
+    const r = await fetch(API + jalan, { method: "POST", headers: { "Content-Type": "application/json", ...(token ? { Authorization: "Bearer " + token } : {}) }, body: JSON.stringify(isi || {}) });
+    if (r.status === 401 && jalan.startsWith("sp2dk/")) { tutup(); throw new Error("Sesi habis, masuk lagi."); }
+    return r;
+  }
+  async function mintaJson(jalan, isi) {
+    const r = await minta(jalan, isi), j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.galat || ("Gagal (" + r.status + ")"));
+    return j;
+  }
+  function tutup() { token = null; try { sessionStorage.removeItem(KUNCI); } catch (e) {} $("#gerbang").hidden = false; $("#sandiMasuk").value = ""; }
+
+  $("#formMasuk").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const ket = $("#ketMasuk"), tombol = $("#tombolMasuk");
+    tombol.disabled = true; ket.className = ""; ket.textContent = "Memeriksa...";
+    try {
+      const j = await mintaJson("isian/masuk", { akun: AKUN, sandi: $("#sandiMasuk").value });
+      token = j.token; try { sessionStorage.setItem(KUNCI, token); } catch (e2) {}
+      await muat(); $("#gerbang").hidden = true; ket.textContent = "";
+    } catch (err) {
+      ket.className = "salah";
+      ket.textContent = err instanceof TypeError ? "Server tidak bisa dihubungi. Coba lagi sebentar." : (err.message === "akun atau sandi salah" ? "Sandi salah" : err.message);
+      $("#sandiMasuk").value = "";
+    } finally { tombol.disabled = false; }
+  });
+  $("#keluar").addEventListener("click", tutup);
+  $("#muat").addEventListener("click", () => muat().catch((e) => alertRingan(e.message)));
+  function alertRingan(t) { const k = $("#rinci"); k.replaceChildren(el("div", "kosong", t)); }
+
+  async function muat() {
+    const j = await mintaJson("sp2dk/daftar");
+    surat = j.surat || []; fiskus = j.fiskus || {};
+    gambarSaring(); gambarDaftar();
+    if (terpilih && surat.some((s) => s.id === terpilih)) await buka(terpilih);
+  }
+
+  function gambarSaring() {
+    const kotak = $("#saring"); kotak.replaceChildren();
+    const tombol = (teks, aktif, klik) => { const b = el("button", aktif ? "pilih" : "", teks); b.type = "button"; b.addEventListener("click", klik); kotak.append(b); };
+    tombol("Semua petugas", !saringF, () => { saringF = ""; gambarSaring(); gambarDaftar(); });
+    for (const [k, f] of Object.entries(fiskus)) tombol(f.nama + " (Fiskus " + f.tahun + ")", saringF === k, () => { saringF = k; gambarSaring(); gambarDaftar(); });
+    kotak.append(el("span", "sekat"));
+    tombol("Semua status", !saringS, () => { saringS = ""; gambarSaring(); gambarDaftar(); });
+    for (const [k, t] of Object.entries(STATUS)) {
+      const n = surat.filter((s) => s.status === k && (!saringF || s.fiskus === saringF)).length;
+      tombol(t + " " + n, saringS === k, () => { saringS = k; gambarSaring(); gambarDaftar(); });
+    }
+  }
+
+  function gambarDaftar() {
+    const kotak = $("#daftar"); kotak.replaceChildren();
+    const tampil = surat.filter((s) => (!saringF || s.fiskus === saringF) && (!saringS || s.status === saringS));
+    if (!tampil.length) { kotak.append(el("div", "kosong", surat.length ? "Tidak ada surat untuk saringan ini" : "Belum ada surat masuk")); return; }
+    for (const s of tampil) {
+      const b = el("button", "baris" + (s.dibaca ? "" : " belum") + (s.id === terpilih ? " pilih" : "")); b.type = "button";
+      const atas = el("div", "atasnya"); atas.append(el("span", "", s.jenis + " · " + s.nama_fiskus + " (Fiskus " + s.tahun_fiskus + ")"), el("span", "cap " + s.status, STATUS[s.status] || s.status));
+      const bawah = el("div", "bawahnya"); bawah.append(el("span", "", tgl(s.tanggal) + " · jawab s.d. " + tgl(s.batas)), el("span", "", s.potensi ? "Potensi Rp " + rp(s.potensi) : ""));
+      b.append(atas, el("div", "perihal", s.perihal), bawah);
+      b.addEventListener("click", () => buka(s.id).catch((e) => alertRingan(e.message)));
+      kotak.append(b);
+    }
+  }
+
+  async function buka(id) {
+    const j = await mintaJson("sp2dk/lihat", { id });
+    terpilih = id; berkas = [];
+    const i = surat.findIndex((s) => s.id === id); if (i >= 0) surat[i] = { ...surat[i], dibaca: true, status: j.surat.status };
+    gambarDaftar(); gambarRinci(j.surat);
+  }
+
+  function gambarRinci(s) {
+    const k = $("#rinci"), isi = s.isi || {}; k.replaceChildren();
+    const kepala = el("div", "atasnya kapital"); kepala.style.cssText = "display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--redup);font-size:15px;letter-spacing:.08em";
+    kepala.append(el("span", "", s.jenis + " internal · nomor " + s.nomor), el("span", "cap " + s.status, STATUS[s.status] || s.status));
+    k.append(kepala, el("h2", "", s.perihal));
+    const kop = el("div", "kop");
+    for (const [a, b] of [["Petugas", s.nama_fiskus + " (Fiskus " + s.tahun_fiskus + ")"], ["Kepada", isi.entitas], ["Jenis pajak", isi.jenis_pajak], ["Masa / tahun pajak", isi.masa],
+                          ["Tanggal surat", tgl(s.tanggal)], ["Batas jawaban", tgl(s.batas)], ["Potensi pajak", s.potensi ? "Rp " + rp(s.potensi) : "-"]]) {
+      const d = el("div"); d.append(el("span", "", a), el("b", "", b || "-")); kop.append(d);
+    }
+    k.append(kop);
+    if (isi.rujukan) k.append(el("h3", "", "Lanjutan dari surat"), el("div", "", isi.rujukan));
+    k.append(el("h3", "", "Ringkasan"), el("div", "paragraf", isi.ringkasan));
+    k.append(el("h3", "", "Potensi temuan"));
+    const gulir = el("div", "gulir"), t = el("table"), th = el("tr");
+    for (const [a, c] of [["No", ""], ["Pos dan uraian", ""], ["Menurut Accurate", "angka"], ["Menurut laporan pajak", "angka"], ["Selisih", "angka"], ["Potensi pajak", "angka"]]) th.append(el("th", c, a));
+    const kepalaT = el("thead"); kepalaT.append(th); const badan = el("tbody");
+    (isi.temuan || []).forEach((x, n) => {
+      const tr = el("tr"), td = el("td"); td.append(el("b", "", x.pos), el("small", "", x.uraian), el("small", "", "Sumber data: " + x.sumber));
+      tr.append(el("td", "", n + 1), td, el("td", "angka", rp(x.nilai_accurate)), el("td", "angka", rp(x.nilai_laporan)), el("td", "angka", rp(x.selisih)), el("td", "angka", rp(x.potensi_pajak)));
+      badan.append(tr);
+    });
+    const kaki = el("tfoot"), trk = el("tr"), tdk = el("td", "", "Jumlah potensi pajak"); tdk.colSpan = 5; trk.append(tdk, el("td", "angka", rp(s.potensi))); kaki.append(trk);
+    t.append(kepalaT, badan, kaki); gulir.append(t); k.append(gulir);
+    const butir = (judul, daftarnya, tag) => { if (!daftarnya || !daftarnya.length) return; const l = el(tag); for (const x of daftarnya) l.append(el("li", "", x)); k.append(el("h3", "", judul), l); };
+    butir("Yang diminta dari wajib pajak", isi.permintaan, "ol");
+    butir("Dasar hukum", isi.dasar_hukum, "ul");
+    if (isi.pola) k.append(el("h3", "", "Cara kerja petugas yang dipakai"), el("div", "paragraf", isi.pola));
+
+    k.append(el("h3", "", "Jawaban dan tanggapan"));
+    if (!s.balasan.length) k.append(el("div", "kosong", "Belum ada jawaban"));
+    for (const b of s.balasan) {
+      const kotak = el("div", "balasan " + b.dari);
+      kotak.append(el("div", "siapa", (b.dari === "wp" ? "Jawaban wajib pajak (akun " + b.akun + ")" : "Tanggapan petugas " + s.nama_fiskus) + " · " + tgl(b.waktu)), el("div", "paragraf", b.teks));
+      if (b.lampiran.length) {
+        const l = el("div", "lamp");
+        for (const f of b.lampiran) { const t2 = el("button", "", "⬇ " + f.nama + " (" + Math.ceil(f.ukuran / 1024) + " KB)"); t2.type = "button"; t2.addEventListener("click", () => unduh(s.id, f, t2)); l.append(t2); }
+        kotak.append(l);
+      }
+      k.append(kotak);
+    }
+    if (s.status === "selesai") { k.append(el("div", "kosong", "Surat ini sudah ditutup petugas")); return; }
+
+    k.append(el("h3", "", "Kolom jawaban"));
+    const form = el("form"); form.id = "formJawab";
+    const ta = el("textarea"); ta.placeholder = "Tulis jawaban atau penjelasan di sini..."; ta.maxLength = 20000; ta.required = true;
+    const pilih = el("input"); pilih.type = "file"; pilih.multiple = true; pilih.hidden = true;
+    pilih.accept = ".jpg,.jpeg,.png,.gif,.webp,.heic,.heif,.pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,.zip";
+    const daftarPilih = el("div"); daftarPilih.id = "pilihan";
+    const gambarPilih = () => { daftarPilih.replaceChildren(); berkas.forEach((f, n) => { const sp = el("span", "", f.name + " "); const x = el("button", "", "×"); x.type = "button"; x.title = "Batalkan berkas ini";
+      x.addEventListener("click", () => { berkas.splice(n, 1); gambarPilih(); }); sp.append(x); daftarPilih.append(sp); }); };
+    pilih.addEventListener("change", () => { berkas.push(...pilih.files); pilih.value = ""; gambarPilih(); });
+    const aksi = el("div", "aksi"), lampir = el("button", "tipis", "📎 Lampirkan berkas"), kirim = el("button", "utama", "Kirim jawaban"), ket = el("span"); ket.id = "ketJawab";
+    lampir.type = "button"; lampir.addEventListener("click", () => pilih.click()); kirim.type = "submit";
+    aksi.append(lampir, kirim, ket); form.append(ta, pilih, daftarPilih, aksi); k.append(form);
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault(); kirim.disabled = true; ket.className = "";
+      try {
+        const terunggah = [];
+        for (let n = 0; n < berkas.length; n++) {
+          const f = berkas[n]; ket.textContent = "Mengunggah " + (n + 1) + " dari " + berkas.length + ": " + f.name;
+          if (f.size > 20 * 1024 * 1024) throw new Error(f.name + " lebih dari 20 MB");
+          const r = await fetch(API + "sp2dk/unggah?meta=" + encodeURIComponent(JSON.stringify({ id: s.id, nama: f.name })), { method: "POST", headers: { Authorization: "Bearer " + token, "Content-Type": "application/octet-stream" }, body: f });
+          const j = await r.json().catch(() => ({}));
+          if (r.status === 401) { tutup(); throw new Error("Sesi habis, masuk lagi."); }
+          if (!r.ok) throw new Error(f.name + ": " + (j.galat || r.status));
+          terunggah.push(j.berkas);
+        }
+        ket.textContent = "Menyimpan jawaban...";
+        const j = await mintaJson("sp2dk/jawab", { id: s.id, teks: ta.value, lampiran: terunggah });
+        berkas = [];
+        const i = surat.findIndex((x) => x.id === s.id); if (i >= 0) surat[i] = { ...surat[i], status: j.surat.status, dibaca: true };
+        gambarSaring(); gambarDaftar(); gambarRinci(j.surat);
+        const baru = $("#ketJawab"); if (baru) { baru.className = "baik"; baru.textContent = "Jawaban terkirim ke petugas."; }
+      } catch (err) { ket.className = "salah"; ket.textContent = err instanceof TypeError ? "Server tidak bisa dihubungi. Jawaban belum terkirim." : err.message; kirim.disabled = false; }
+    });
+  }
+
+  async function unduh(id, f, tombol) {
+    tombol.disabled = true;
+    try {
+      const r = await minta("sp2dk/unduh", { id, berkas: f.berkas });
+      if (!r.ok) throw new Error("gagal");
+      const a = document.createElement("a"); a.href = URL.createObjectURL(await r.blob()); a.download = f.nama; document.body.append(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 30000);
+    } catch (e) { tombol.textContent = "Gagal mengunduh " + f.nama; } finally { tombol.disabled = false; }
+  }
+
+  if (token) muat().then(() => { $("#gerbang").hidden = true; }).catch(() => tutup());
+})();
+</script>
+</body></html>
