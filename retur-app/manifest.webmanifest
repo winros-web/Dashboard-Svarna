@@ -1,0 +1,30 @@
+{
+ "name": "Retur Svarna Dipa",
+ "short_name": "Retur",
+ "lang": "id",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#11171d",
+ "theme_color": "#11171d",
+ "description": "Scan SN, kartu garansi, kondisi & kelengkapan barang retur / titip service ke pabrik.",
+ "icons": [
+  {
+   "src": "ikon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "ikon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "ikon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
